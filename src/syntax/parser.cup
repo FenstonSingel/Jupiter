@@ -172,6 +172,8 @@ rv32i       ::= I_LUI:i xreg:rd delimiter imm:imm
                 {: program.addJType(ileft, (String) i, rd, offset, Relocation.PCREL); :}
               | I_JALR:i xreg:rd delimiter xreg:rs1 delimiter imm:imm
                 {: program.addIType(ileft, (String) i, rd, rs1, imm, -1); :}
+              | I_JALR:i xreg:rd delimiter xreg:rs1 delimiter PCREL_LO LPAREN id:id RPAREN
+                {: program.addIType(ileft, (String) i, rd, rs1, id, Relocation.PCRELLO); :}
               | I_JALR:i xreg:rd delimiter imm:imm LPAREN xreg:rs1 RPAREN
                 {: program.addIType(ileft, (String) i, rd, rs1, imm, -1); :}
               | I_BEQ:i xreg:rs1 delimiter xreg:rs2 delimiter offset:offset
